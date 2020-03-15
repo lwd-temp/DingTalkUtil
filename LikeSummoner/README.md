@@ -14,7 +14,7 @@ https://h5.m.taobao.com/tblive/dingtalk/pc-live-v3.html
 根据函数名,在js文件中的14548行可以找到dingtalk.grouplive.uploadLikesClick(B, t.favorCountCache)即 函数 钉钉.群直播.上传赞点击(B变量,赞数缓存)  
 在其他功能尚不明晰的情况下(本仓库作者并未学习JavaScript),我们可以尝试修改t.favorCountCache变量为一个常量从而使每次上传时提交的赞数保持一定值.  
 修改t.favorCountCache为任意大于0的整数(不要过大,极限为2147483647,会导致溢出,不要使用上述极限值),或可实现需求.  
-注意:截至2020\3\15,DingTalk服务器似乎已经禁止了过大数值的上传,每次上传数值似乎不能大于100?
+注意:截至2020\3\15,DingTalk服务器似乎已经禁止了过大数值的上传,每次上传数值似乎不能大于100?  
 # 我们要怎么做?  
 1.请求https://h5.m.taobao.com/tblive/dingtalk/pc-live-v3.html 并保存.  
 2.修改t.favorCountCache 保存为patched-pc-live-v3.html (实例见代码库)  
