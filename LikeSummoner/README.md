@@ -15,9 +15,17 @@ https://h5.m.taobao.com/tblive/dingtalk/pc-live-v3.html
 在其他功能尚不明晰的情况下(本仓库作者并未学习JavaScript),我们可以尝试修改t.favorCountCache变量为一个常量从而使每次上传时提交的赞数保持一定值.  
 修改t.favorCountCache为任意大于0的整数(不要过大,极限为2147483647,会导致溢出,不要使用上述极限值),或可实现需求.  
 注意:截至2020\3\15,DingTalk服务器似乎已经禁止了过大数值的上传,每次上传数值似乎不能大于100?  
+# 新的限制和解决方案  
+可以通过多次少量的方法实现大量的点赞召唤,注意到代码  
+t.favorCountCache > 0 && (dingtalk.grouplive.uploadLikesClick(B, t.favorCountCache),t.favorCountCache = 0)}, 1e4)  
+我们可以组阻止favorCountCache被重置为0以便点赞流程循环进行,1e4即1*10^4,盲猜延时(毫秒),故我们可以将原始代码修改为:  
+t.favorCountCache > 0 && (dingtalk.grouplive.uploadLikesClick(B,20),t.favorCountCache = 1)}, 1)  
+即一旦点击点赞按钮每1毫秒上传20次点赞.  
+注意:使用此方法修改会导致死循环.  
+最好的方案是新增网页元素,提供新按钮用于控制循环,在这里我们暂且不作讨论.  
 # 我们要怎么做?  
 1.请求https://h5.m.taobao.com/tblive/dingtalk/pc-live-v3.html 并保存.  
-2.修改t.favorCountCache 保存为patched-pc-live-v3.html (实例见代码库)  
+2.修改t.favorCountCache或使用你喜欢的方式修改并保存为patched-pc-live-v3.html (实例见代码库)  
 3.安装并打开Fiddler.  
 4.点击Tools-Options-HTTPS 勾选Capture HTTPS CONNECTs 和Decrypt HTTPS traffic 安装证书(如果提示) 勾选Check for certificate revocation  
 5.回到主界面,点击AutoResponder 勾选Enable rules和Unmatched requests passthrough  
