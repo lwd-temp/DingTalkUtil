@@ -33,6 +33,8 @@ this.disableThumbup ? (this.favorCountType = "action", this.favorCount++, this.f
 1.获取pc-live-v3.html并保存备份.  
 2.修改this.messageBox(I.i18next.t("pc_grouplive_live_favor_ban_tips"), [I.i18next.t("pc_grouplive_i_know"), ""])为(this.favorCountType = "action", this.favorCount++, this.favorCountCache++)并保存为patched-pc-live-v3.html(实例见代码库)  
 3.替换请求,参照LikeSummoner操作.  
+# 新的限制?  
+2020\3\17测试,此解决方案似乎只有和LikeSummoner结合使用才能有显著效果?  
 # 警告  
 此解决方案仅用于技术研究,作者不对任何人的不当行为负责.  
 # 关于真实性检验和DingTalk方面的修复意见  
